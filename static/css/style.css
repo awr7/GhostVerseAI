@@ -1,6 +1,11 @@
 body, html {
     height: 100%;
     margin: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .video-background {
@@ -17,15 +22,6 @@ body, html {
     height: auto;
 }
 
-.content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-align: center;
-    z-index: 1;
-}
 
 /* Darken video */
 .video-background::after {
@@ -35,6 +31,59 @@ body, html {
     left: 0;
     bottom: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5); 
     z-index: 1;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    z-index: 2;
+}
+
+.header img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 100%;
+    padding: 0 10px;
+    margin: 0; 
+}
+
+.upload-beat, .choose-character {
+    margin: 0 10px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    width: 50%;
+}
+
+.generate-lyrics {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.generate-lyrics button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    color: white;
+    background-color: #1a1a1a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.generate-lyrics button:hover {
+    background-color: #333333;
 }

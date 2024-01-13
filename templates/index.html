@@ -2,8 +2,6 @@
 {% load static %}
 
 {% block content %}
-
-
 <div class="video-background">
     <video autoplay loop muted>
         <source src="{% static 'videos/kanye.mp4' %}" type="video/mp4">
@@ -12,11 +10,25 @@
 </div>
 
 <div class="header">
-    <img> src="{% static 'images/logo.png' %}" type="img" </img>
+    <img src="{% static 'images/GhostVerseAI.png' %}" alt="GhostVerseAI Logo">
+    <span>GhostVerseAI</span>
 </div>
 
-<div class="content">
-    <h1>Welcome to GhostVerseAI</h1>
-    <p>Meet your own personal AI GHOST WRITER</p>
+<div class="main-content">
+    <div class="upload-beat">
+        <h2>Upload Your Beat</h2>
+        <input type="file" accept=".mp3" />
+    </div>
+    <div class="choose-character">
+        <h2>Choose Your AI Character</h2>
+        <select>
+            <option value="ai_char_1">AI Character 1</option>
+            <option value="ai_char_2">AI Character 2</option>
+        </select>
+    </div>
+</div>
+
+<div class="generate-lyrics">
+    <button>Generate Lyrics</button>
 </div>
 {% endblock %}
