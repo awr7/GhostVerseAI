@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="upload-form">
+    <form action="{% url 'upload_beat' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload Beat</button>
+    </form>
+</div>
+
+{% if tempo %}
+    <div class="analysis-results">
+        <p>Estimated Tempo: {{ tempo }} BPM</p>
+    </div>
+{% endif %}
+{% endblock %}

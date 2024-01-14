@@ -14,21 +14,31 @@
     <span>GhostVerseAI</span>
 </div>
 
-<div class="main-content">
-    <div class="upload-beat">
-        <h2>Upload Your Beat</h2>
-        <input type="file" accept=".mp3" />
+<form method="post" action="{% url 'upload_beat' %}" enctype="multipart/form-data" id="uploadForm">
+    {% csrf_token %}
+    <div class="main-content">
+        <div class="upload-beat">
+            <h2>Upload Your Beat</h2>
+            {{ form.file }} 
+        </div>
+        <div class="choose-character">
+            <h2>Choose Your AI Character</h2>
+            <select name="character">
+                <option value="ai_char_1">AI Character 1</option>
+                <option value="ai_char_2">AI Character 2</option>
+            </select>
+        </div>
     </div>
-    <div class="choose-character">
-        <h2>Choose Your AI Character</h2>
-        <select>
-            <option value="ai_char_1">AI Character 1</option>
-            <option value="ai_char_2">AI Character 2</option>
-        </select>
+    <div class="generate-lyrics">
+        <button type="submit">Generate Lyrics</button>
     </div>
-</div>
+</form>
 
-<div class="generate-lyrics">
-    <button>Generate Lyrics</button>
-</div>
+<div class="spinner" id="spinner"></div>
+
+<script>
+    document.getElementById('uploadForm').onsubmit = function() {
+        document.getElementById('spinner').style.display = 'block';
+    };
+</script>
 {% endblock %}
