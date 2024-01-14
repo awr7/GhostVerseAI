@@ -16,7 +16,7 @@
 
 <form method="post" action="{% url 'upload_beat' %}" enctype="multipart/form-data" id="uploadForm">
     {% csrf_token %}
-    <div class="main-content">
+    <div class="main-content" id="mainContent">
         <div class="upload-beat">
             <h2>Upload Your Beat</h2>
             {{ form.file }} 
@@ -29,16 +29,13 @@
             </select>
         </div>
     </div>
-    <div class="generate-lyrics">
+    <div class="generate-lyrics" id="generate-lyrics">
         <button type="submit">Generate Lyrics</button>
     </div>
 </form>
 
 <div class="spinner" id="spinner"></div>
+<div id="loadingText"></div>
 
-<script>
-    document.getElementById('uploadForm').onsubmit = function() {
-        document.getElementById('spinner').style.display = 'block';
-    };
-</script>
+<script src="{% static 'js/main.js' %}"></script> 
 {% endblock %}

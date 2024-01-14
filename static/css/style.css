@@ -102,7 +102,21 @@ body, html {
     transform: translate(-50%, -50%);
 }
 
+#loadingText {
+    position: fixed;
+    top: 60%;
+    left: 53%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: white;
+    z-index: 1001;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.analysis-results {
+    color: black;
 }
