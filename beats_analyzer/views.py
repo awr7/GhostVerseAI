@@ -1,7 +1,8 @@
 import librosa
+from madmom.features.key import CNNKeyRecognitionProcessor, key_prediction_to_label
 from django.shortcuts import render
 from .forms import BeatUploadForm
-from .models import Beat
+
 
 # Create your views here.
 def home(request):
@@ -11,14 +12,25 @@ def home(request):
 def upload_beat(request):
     if request.method == 'POST':
         form = BeatUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            beat_instance = Beat(file=request.FILES['file'])
-            beat_instance.save()
+        if form.is_valid():    
+            uploaded_file = request.FILES['file']
+            y, sr = librosa.load(uploaded_file, sr=None)
+            tempo, _ = librosa.beat.beat_track(y=y, sr=sr)
+            duration = librosa.get_duration(y=y, sr=sr)
+            key_processor = CNNKeyRecognitionProcessor()
+            key_prediction = key_processor(uploaded_file.temporary_file_path())
+            key = key_prediction_to_label(key_prediction)
 
-            y, sr = librosa.load(beat_instance.file.path, sr=None)
-            tempo,_ = librosa.beat.beat_track(y=y, sr=sr)
-            form.fields['is_submitted'].initial = True
-            return render(request, 'upload_beat.html', {'tempo': tempo})
+            analysis_results = {
+                'tempo': tempo,
+                'duration': duration,
+                'key': key,
+            }
+
+            return render(request, 'upload_beat.html', analysis_results)
         else:
             form = BeatUploadForm()
-        return render(request, 'upload_beat.html',{'form': form})
+    else:
+        form = BeatUploadForm()
+
+    return render(request, 'upload_beat.html', {'form': form})
